@@ -34,6 +34,13 @@
 # Each layer processes the input data sequentially, and the output of one layer serves as the input to the next.
 # More layers can potentially capture finer details in the data, but they also increase the model's computational complexity.
 # The choice of num_layers is a trade-off between model performance and computational resources
+import nn as nn
 
+class EncoderLayer(nn.Module):
+    def __init__(self, d_model, ffn_hidden, num_heads, drop_prob):
+        super(EncoderLayer, self).__init__()
 
-def main ():
+class Encoder (nn.Module):
+    def __init__(self, d_model, ffn_hidden, num_heads, drop_prob, num_layers):
+        super().__init__()
+        self.layers = nn.Sequential(*[EncoderLayer(d_model, ffn_hidden, num_heads, drop_prob) for _ in range(num_layers)])
